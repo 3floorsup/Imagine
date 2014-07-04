@@ -329,6 +329,11 @@ final class Image extends AbstractImage
         if ((!isset($options['flatten']) || $options['flatten'] === true) && count($this->layers) > 1) {
             $this->flatten();
         }
+
+        // disable alpha if image has an alpha channel
+        if (true === !!$this->imagick->getImageAlphaChannel() && (isset($options['disable-alpha'])) && true === $options['disable-alpha']) {
+            $this->flatten();
+        }
     }
 
     /**
